@@ -38,6 +38,12 @@ labels_train   = labels_train[:150]
 
 
 ### your code goes here
-
-
-
+from sklearn.tree import DecisionTreeClassifier
+cls = DecisionTreeClassifier()
+cls.fit(features_train, labels_train)
+print 'train: ', cls.score(features_train, labels_train)
+print 'test: ', cls.score(features_test, labels_test)
+important_words = sorted([(i, importance) for i, importance in enumerate(cls.feature_importances_) if importance > 0.2],
+                         key=lambda x: -x[1])
+print important_words
+print [vectorizer.get_feature_names()[i] for i, _ in important_words]

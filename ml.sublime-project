@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+      "folder_exclude_patterns": ["ud120-projects/final_project/emails_by_address"]
+		}
+	]
+}

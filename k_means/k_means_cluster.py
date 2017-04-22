@@ -48,10 +48,20 @@ data_dict.pop("TOTAL", 0)
 ### can be any key in the person-level dictionary (salary, director_fees, etc.) 
 feature_1 = "salary"
 feature_2 = "exercised_stock_options"
+feature_3 = 'total_payments'
 poi  = "poi"
 features_list = [poi, feature_1, feature_2]
 data = featureFormat(data_dict, features_list )
 poi, finance_features = targetFeatureSplit( data )
+
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+scaler.fit(finance_features)
+print 'tranformed: ', scaler.transform([200000., 1000000.])
+
+eso = [f['salary'] for f in data_dict.values() if f['salary'] != 'NaN']
+print eso
+print 'min/max exercised_stock_options:', min(eso), '/', max(eso)
 
 
 ### in the "clustering with 3 features" part of the mini-project,
@@ -64,8 +74,10 @@ plt.show()
 
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
-
-
+from sklearn.cluster import KMeans
+clus = KMeans(n_clusters=2)
+clus.fit(finance_features)
+pred = clus.predict(finance_features)
 
 
 ### rename the "name" parameter when you change the number of features

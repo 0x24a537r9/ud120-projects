@@ -21,13 +21,15 @@ from email_preprocess import preprocess
 ### labels_train and labels_test are the corresponding item labels
 features_train, features_test, labels_train, labels_test = preprocess()
 
+import numpy as np
+from sklearn.naive_bayes import GaussianNB
+classifier = GaussianNB()
 
+t0 = time()
+classifier.fit(features_train, labels_train)
+print 'training time: ', round(time() - t0, 3), 's'
 
-
-#########################################################
-### your code goes here ###
-
-
-#########################################################
-
+t0 = time()
+print 'score: ', classifier.score(features_test, np.asarray(labels_test).reshape(-1, 1))
+print 'scoring time: ', round(time() - t0, 3), 's'
 

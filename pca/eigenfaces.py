@@ -79,6 +79,8 @@ print "Projecting the input data on the eigenfaces orthonormal basis"
 t0 = time()
 X_train_pca = pca.transform(X_train)
 X_test_pca = pca.transform(X_test)
+print 'first PC variance: ', pca.explained_variance_ratio_[0]
+print 'second PC variance: ', pca.explained_variance_ratio_[1]
 print "done in %0.3fs" % (time() - t0)
 
 
